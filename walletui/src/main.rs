@@ -152,8 +152,7 @@ fn read_master_key() -> Result<String> {
 
     eprint!("Master password: ");
     io::stderr().flush()?;
-    let mut value = String::new();
-    io::stdin().read_line(&mut value)?;
+    let value = rpassword::read_password()?;
     let value = value.trim_end_matches(['\r', '\n']).to_string();
     if value.is_empty() {
         return Err(eyre!("master password 不能为空"));
